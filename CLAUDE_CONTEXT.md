@@ -1,25 +1,28 @@
-# CLAUDE_CONTEXT.md
+Crie 3 arquivos Markdown para governança do repo "livraone-invoice" (FlutterFlow + Custom Code), visando reduzir retrabalho e manter compatibilidade com SSO futuro do LivraOne.
 
-## Project
-LivraOne Invoice (FlutterFlow-first app)
+Entregue exatamente 3 arquivos completos (conteúdo final), em Markdown:
 
-## Architecture Rules
-- FlutterFlow is the UI builder. Code must be compatible with Custom Actions / Functions.
-- No direct HTTP calls in UI. All calls go through ApiClient.
-- Auth is MOCK now, REAL later via LivraOne Gateway (SSO).
-- Never assume Firebase Auth.
-- Never assume Supabase Auth.
-- Always preserve orgId, roles, entitlements.
+1) CLAUDE_CONTEXT.md
+- Objetivo do projeto
+- Regras de arquitetura (FlutterFlow custom actions/functions, ApiClient obrigatório, AuthAdapter obrigatório)
+- Fase atual: Phase 1 (mock auth + mock api)
+- Proibições: não assumir Firebase/Supabase, não mexer em UI sem pedido, não introduzir state management complexo
+- Padrões: headers X-App-Id, X-Org-Id, Authorization
 
-## Current Phase
-PHASE 1 — Integration foundation (Auth + ApiClient + Mock)
+2) API_CONTRACT.md
+- Contratos JSON mínimos para:
+  GET /v1/me
+  GET /v1/invoices
+  POST /v1/invoices
+  GET /v1/customers
+  POST /v1/customers
+- Campos obrigatórios: orgId, roles, entitlements
 
-## Forbidden
-- Do not refactor UI.
-- Do not introduce new state managers.
-- Do not change file structure without request.
+3) SCOPE.md
+- O que entra no MVP Invoice (telas e features)
+- O que fica fora (pagamentos, email real, PDF avançado, multi-currency, contabilidade)
+- Roadmap curto (Phase 1/2/3) com gates PASS/FAIL
 
-## Style
-- Explicit
-- Deterministic
-- Minimal abstractions
+Regras:
+- Texto direto, sem explicação extra.
+- Alinhado com futuro SSO via LivraOne Gateway/BFF + Keycloak, mas sem implementar agora.
